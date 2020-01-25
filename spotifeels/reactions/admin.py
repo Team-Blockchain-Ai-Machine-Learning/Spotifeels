@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from .models import Reaction, Skill, Profile
+from .models import Reaction, Skill, Profile, Task
 
 class ProfileInline(admin.StackedInline):
     model = Profile
@@ -25,3 +25,4 @@ admin.site.register(User, CustomUserAdmin)
 # Register your models here.
 admin.site.register(Reaction)
 admin.site.register(Skill)
+admin.site.register(Task)

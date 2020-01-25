@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'spotifeels.spotifeels_api',\
     'myapp.apps.MyappConfig',
     'reactions',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
