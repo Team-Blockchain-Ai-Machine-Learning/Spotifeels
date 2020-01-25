@@ -4,3 +4,7 @@ from rest_framework import generics
 class ReactionListCreate(generics.ListCreateAPIView):
     queryset = Reaction.objects.all()
     serializer_class = ReactionSerializer
+
+class ReactionRetrieveAPIView(generics.RetrieveAPIView):
+	queryset = Reaction.objects.all()
+	serializer_class = ReactionSerializer
