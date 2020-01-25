@@ -10,11 +10,11 @@ import Interface from "./Interface";
 
 function App() {
 
-  //var i = new Interface();
+  var i = new Interface();
   
-  if (true) {// (i.session) {
+  if (i.getSession() != null) {
     return (<Login callback={loadApp} />);
-  }
+  } 
 
   var user = {level: 0};//i.getUser(uid);
 
