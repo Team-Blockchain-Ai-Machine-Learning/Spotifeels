@@ -1,0 +1,9 @@
+*.db
+*.log
+*.env
+*.dev
+*.sqlite3
+*.pyc
+logs/
+media/
+Procfile

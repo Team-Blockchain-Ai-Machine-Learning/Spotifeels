@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'spotifeels.spotifeels_api',\
     'myapp.apps.MyappConfig',
+    'reactions',
 ]
 
 MIDDLEWARE = [
