@@ -2,25 +2,33 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import Login from "./Login";
+import HRView from "./HRView";
+import UserView from "./UserView";
+import ManagerView from "./ManagerView";
+import Interface from "./Interface";
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  //var i = new Interface();
+  
+  if (true) {// (i.session) {
+    return (<Login callback={loadApp} />);
+  }
+
+  var user = {level: 0};//i.getUser(uid);
+
+  if (user.level = 0) {
+    return(<UserView />);
+  } else if (user.level = 1) {
+    return(<ManagerView />);
+  }else if (user.level = 2) {
+    return(<HRView />);
+  }
+  
 }
 
+function loadApp() {
+  return;
+}
 export default App;
