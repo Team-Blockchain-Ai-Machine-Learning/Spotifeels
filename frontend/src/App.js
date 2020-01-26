@@ -18,22 +18,22 @@ class App extends React.Component {
   var handleUpdate = () => {
     this.forceUpdate();};
 
-    console.log(i.getSession());
-  if (!i.getSession()) {
-    console.log("OKKK");
-    return (<Login callback={handleUpdate} />);
-  }
+    // console.log(i.getSession());
+  // if (!i.getSession()) {
+  //   console.log("OKKK");
+  //   return (<Login callback={handleUpdate} />);
+  // }
 
 
   var user = {level: 1};
-  if (i.getSession() == 4)
-    user = {level: 1};
-  if (i.getSession() == 5)
-    user = {level: 2};
+  // if (i.getSession() == 4)
+  //   user = {level: 1};
+  // if (i.getSession() == 5)
+  //   user = {level: 2};
 
-  console.log(user);
+  // console.log(user);
 
-  if (user.level === 0) {
+  if (true) {
     return(<div>
       <UserView />
       <Logout callback={handleUpdate}/>
