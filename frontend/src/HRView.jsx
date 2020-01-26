@@ -1,57 +1,61 @@
 import React from 'react';
 import LineChart from './LineChart';
-
-var reactions = [
-    {
-        mood: 50,
-        note: "I hate my life",
-        time: 9
-    },
-    {
-        mood: 100,
-        note: "My boss hit on me",
-        time: 10
-    },
-    {
-        mood: 0,
-        note: "He told me it was a joke",
-        time: 10.1
-    },
-    {
-        mood: 75,
-        note: "Lunch with Jane",
-        time: 12
-    },
-    {
-        mood: 25,
-        note: "So many emails",
-        time: 14
-    },
-    {
-        mood: 90,
-        note: "I get to go home!",
-        time: 17
-    },
-];
-
+import Interface from './Interface';
 
 export default class HRView extends React.Component {
   constructor(props) {
     super();
-    var users = [];
-    for (var i = 0; i < 10; i++) {
-      users.push({name: "name"+i, reactions: reactions})
-    }
-    this.state = { 
-      users: users
+
+    this.state = {
+            i: new Interface(),
+            users: null,
     };
+
+    this.state.i.getReactions().then(
+      function(res) {
+        for (var i = 0; i < res.data.length; i++) {
+          var users = {};
+          if (!users[res.data[i].user]) {
+            users[res.data[i].user] = {name: "UsEr NaMe", reactions: []};
+          }
+          users[res.data[i].user].reactions.push({
+                        mood: res.data[i].mood,
+                        time: (Date.parse(res.data[i].time_of_reaction) - Date.parse("2020-01-25"))/1000/60/60 - 18,
+                    });
+        }
+
+      },
+      function(res) {
+        console.log("HR, FAILED!");
+      }
+    )
+
+        var callback = (x) => (this.setState({reactions: x}));
+        this.state.i.getReactions().then(
+            function(res) {
+                var reactions = [];
+                for (var i = 0; i < res.data.length; i++) {
+                    reactions.push({
+                        mood: res.data[i].mood,
+                        time: (Date.parse(res.data[i].time_of_reaction) - Date.parse("2020-01-25"))/1000/60/60 - 18,
+                    });
+                }
+                callback(reactions);
+                // TODO: we need to smooth this :P.
+            },
+            function(res) {
+                console.log("COULD NOT GET REACTIONS!")
+            }
+        )
   }
 
   render() {
-    return(
-      <div>
-        {this.state.users.map((user) => (<LineChart name={user.name} reactions={user.reactions}/>))}
-      </div>
-    );
+    var out = <h1>Loading...</h1>;
+    if (this.state.users) {
+      out = <div>
+          {this.state.users.map((user) => (<LineChart name={user.name} reactions={user.reactions}/>))}
+        </div>;
+      }
+    return(out);
   }
 }
