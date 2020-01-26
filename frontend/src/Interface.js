@@ -29,6 +29,10 @@ export default class Interface {
     getReactions(payload) {
         return ajax("GET", backendURL+"/api/reactions", null);
     }
+
+    getUsers(payload) {
+        return ajax("GET", backendURL+"/api/users", null);
+    }
 }
 
 function ajax(method, url, payload) {

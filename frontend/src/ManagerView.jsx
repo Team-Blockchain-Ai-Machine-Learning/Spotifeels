@@ -27,6 +27,7 @@ export default class ManagerView extends React.Component {
             },
             function(res) {
                 console.log("COULD NOT GET REACTIONS!")
+		    console.log(res);
             }
         )
     }
