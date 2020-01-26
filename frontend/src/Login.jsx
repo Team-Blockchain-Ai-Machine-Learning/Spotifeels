@@ -17,7 +17,7 @@ export default class LogIn extends React.Component {
     }
 
     submit(event) {
-        if (this.i.loginUser(this.state.username, this.state.password).then(
+        if (this.i.login(this.state.username, this.state.password).then(
             function(res) {
                 // TODO
                 return true;
