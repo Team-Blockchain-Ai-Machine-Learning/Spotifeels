@@ -15,7 +15,15 @@ export default class Interface {
     }
 
     postReaction(payload) {
-        return ajax("GET", backendURL+"/api/reactions/create", payload);
+        return ajax("POST", backendURL+"/api/reactions/create/", payload);
+    }
+
+    postTask(payload) {
+        return ajax("POST", backendURL+"/api/tasks/create/", payload);
+    }
+
+    postSkill(payload) {
+      return ajax("POST", backendURL+"/api/skills/create/", payload);
     }
 
     getReactions(payload) {
@@ -27,6 +35,7 @@ function ajax(method, url, payload) {
   return new Promise(function(resolve, reject) {
     var req = new XMLHttpRequest();
     req.open(method, url);
+    req.setRequestHeader("Content-Type", "application/json");
     req.onreadystatechange = function() {
       if (req.readyState == 4) {
         if (req.status == 200 || req.status == 201) {
