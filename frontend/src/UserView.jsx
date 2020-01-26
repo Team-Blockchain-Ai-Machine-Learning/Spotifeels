@@ -8,17 +8,14 @@ export default class UserView extends React.Component {
 
     this.state = {
       numResponses: 0,
-      question: "Good morning Sarah! How well rested do you feel?",
-      reaction: {
-        user: 1,
-        mood: 50,
-        note: "",
-        task: 0
-      },
-      task: {
-        title: "",
-        skills: []
-      },
+      question: "Hello Jessica!  How excited are you to get to work today?",
+      user: 1,
+      mood: "50",
+      note: "",
+      task: 0,
+      title: "",
+      skills: []
+      ,
       
       i: new Interface(),
     };
