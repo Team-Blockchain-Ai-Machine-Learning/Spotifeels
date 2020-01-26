@@ -1,5 +1,6 @@
 import React from 'react';
 import Interface from "./Interface";
+import './App.css';
 
 export default class UserView extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ export default class UserView extends React.Component {
     this.state = {
       message: "",
       reaction: {
+        user: 1,
         mood: 50,
         note: "",
         task: 0
@@ -36,7 +38,7 @@ export default class UserView extends React.Component {
       skills: ["gspot","mindfuck"]
     };
     var callback = (x) => this.setState({message: x});
-    if (this.state.i.postReaction(payload).then(
+    if (this.state.i.postTask(payload).then(
         function(res) {
           callback("SENT!");
         },
@@ -91,22 +93,39 @@ export default class UserView extends React.Component {
     return(
       <div>
         {message}
+        
         <form  onSubmit={this.submitReaction}>
-            <input type="range" name="mood" min="0" max="100"
-            value={this.state.reaction.mood}
+        <fieldset>
+          <div className="slidecontainer">
+            <input type="range" name="mood" min="0" max="100" className="slider"
+            value={this.state.mood}
             onChange={this.updateMood}/>
-            <input type="textarea" value={this.state.reaction.note} onChange={this.updateNote} placeholder="Note"/>
+          </div>
+            <textarea value={this.state.note} onChange={this.updateNote} placeholder="Note"/>
             <input type="submit"></input>
             
             <br />
+        </fieldset>
 
         </form>
+
+        
+    {/* <legend><span class="number">1</span> Your basic info</legend>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="user_name">
+
+    <label for="mail">Email:</label>
+    <input type="email" id="mail" name="user_email"></input> */}
+        
         <form  onSubmit={this.submitTask}>
+
+            <h1>What are you working on?</h1>
+            <fieldset>
             <input type="text" value={this.state.task.title} onChange={this.updateTitle} placeholder="Title"/>
             <input type="submit"></input>
             
             <br />
-
+            </fieldset>
         </form>
        </div>
     );
