@@ -20,7 +20,7 @@ export default class UserView extends React.Component {
   submit(event) {
     var payload = {
       user: 1,
-      mood: this.state.mood,
+      mood: parseInt(this.state.mood),
       comment: this.state.note,
       task: 1
     };

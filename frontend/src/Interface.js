@@ -15,7 +15,7 @@ export default class Interface {
     }
 
     postReaction(payload) {
-        return ajax("POST", backendURL+"/api/reactions/create", payload);
+        return ajax("GET", backendURL+"/api/reactions/create", payload);
     }
 
     getReactions(payload) {
