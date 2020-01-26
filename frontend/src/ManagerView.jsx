@@ -1,50 +1,42 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import LineChart from './LineChart';
-
-var reactions = [
-    {
-        mood: 50,
-        note: "I hate my life",
-        time: 9
-    },
-    {
-        mood: 100,
-        note: "My boss hit on me",
-        time: 10
-    },
-    {
-        mood: 0,
-        note: "He told me it was a joke",
-        time: 10.1
-    },
-    {
-        mood: 75,
-        note: "Lunch with Jane",
-        time: 12
-    },
-    {
-        mood: 25,
-        note: "So many emails",
-        time: 14
-    },
-    {
-        mood: 90,
-        note: "I get to go home!",
-        time: 17
-    },
-];
+import Interface from './Interface';
 
 export default class ManagerView extends React.Component {
+    constructor(props) {
+        super();
 
-  state = { 
-    center: null
-  };
+        this.state = {
+            i: new Interface(),
+            reactions: [],
+        };
+
+        var callback = (x) => (this.setState({reactions: x}));
+        this.state.i.getReactions().then(
+            function(res) {
+                var reactions = [];
+                for (var i = 0; i < res.data.length; i++) {
+                    reactions.push({
+                        mood: res.data[i].mood,
+                        time: (Date.parse(res.data[i].time_of_reaction) - Date.parse("2020-01-25"))/1000/60/60 - 18,
+                    });
+                }
+                callback(reactions);
+                // TODO: we need to smooth this :P.
+            },
+            function(res) {
+                console.log("COULD NOT GET REACTIONS!")
+            }
+        )
+    }
 
   render() {
-
+       var out = <h1>Loading...</h1>;
+       if (this.state.reactions.length)
+        out = <LineChart reactions={this.state.reactions} />;
     return(
-        <LineChart reactions={reactions} />
+       out
     );
   }
 }

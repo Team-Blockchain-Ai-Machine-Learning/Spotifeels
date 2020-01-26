@@ -6,40 +6,46 @@ export default class UserView extends React.Component {
     super(props); 
 
     this.state = {
-      id: 0,
       mood: 50,
+      note: "",
+      message: "",
+      i: new Interface(),
     };
 
     this.submit = this.submit.bind(this);
     this.updateMood = this.updateMood.bind(this);
-  
-    this.i = new Interface();
+    this.updateNote = this.updateNote.bind(this);
   }
 
   submit(event) {
-    var reaction = {
-      user: this.i.getSession(),
-      mood: 9
+    var payload = {
+      user: 1,
+      mood: this.state.mood,
+      comment: this.state.note,
+      task: 1
     };
     var callback = (x) => this.setState({message: x});
-    if (this.i.postReaction(reaction).then(
+    if (this.state.i.postReaction(payload).then(
         function(res) {
-            // TODO
-            return true;
+          callback("SENT!");
         },
         function(res) {
-            return callback("lovely");
+          console.log(res);
+          callback("lovely");
         }
     )) {
-        this.props.callback();
+        callback();
     } 
-    console.log("OK");
     event.preventDefault(); 
   }
 
   updateMood(event) {
     this.setState({mood: event.target.value});
   }
+  updateNote(event) {
+    this.setState({note: event.target.value});
+  }
+
 
   render() {
     var message = "";
@@ -53,6 +59,7 @@ export default class UserView extends React.Component {
             <input type="range" name="mood" min="0" max="100"
             value={this.state.mood}
             onChange={this.updateMood}/>
+            <input type="text" value={this.state.note} onChange={this.updateNote} placeholder="Note"/>
             <input type="submit"></input>
             
             <br />

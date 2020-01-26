@@ -9,6 +9,8 @@ export default class LineChart extends React.Component {
         var y = [];
         var text = [];
 
+        console.log(props.reactions);
+
         for (var i = 0; i < props.reactions.length; i++) {
           x.push(props.reactions[i].time);
           y.push(props.reactions[i].mood);

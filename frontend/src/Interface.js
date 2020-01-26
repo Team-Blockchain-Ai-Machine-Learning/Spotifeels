@@ -1,4 +1,4 @@
-var backendURL = "http://localhost:8080";
+var backendURL = "http://34.95.8.121:8000";
 
 export default class Interface {
     getSession() {
@@ -14,11 +14,13 @@ export default class Interface {
         return ajax("GET", backendURL+"/login", payload);
     }
 
-    postReaction(reaction){
-        var payload = {id: this.i.getSession(), reaction: reaction}
-        return ajax("POST", backendURL+"/reaction", payload);
+    postReaction(payload) {
+        return ajax("POST", backendURL+"/api/reactions/create", payload);
     }
 
+    getReactions(payload) {
+        return ajax("GET", backendURL+"/api/reactions", null);
+    }
 }
 
 function ajax(method, url, payload) {
@@ -38,6 +40,7 @@ function ajax(method, url, payload) {
         } 
       }
     };
+    console.log(JSON.stringify(payload));
     req.send(JSON.stringify(payload));
   });
 }
