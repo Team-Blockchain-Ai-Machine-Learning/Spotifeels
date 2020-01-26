@@ -18,13 +18,14 @@ export default class LogIn extends React.Component {
     }
 
     submit(event) {
-        var log = (x) => this.state.i.setSession(x);
+        var log = (x) => {this.state.i.setSession(x); this.props.callback();};
         var username = this.state.username;
         if (this.state.i.getUsers().then(
             function(res) {
+		    console.log(res);
                 for (var i = 0; i < res.data.length; i++) {
                     if (res.data[i].username == username) {
-                        log(this.data[i].id);
+                        log(res.data[i].id);
                         return true;
                     }
                 }
@@ -33,7 +34,7 @@ export default class LogIn extends React.Component {
                 return false;
             }
         )) {
-            this.props.callback();
+		console.log("ok");
         } else {
             this.setState({error: "Invalid log in", password: ""});
         }

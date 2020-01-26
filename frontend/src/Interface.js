@@ -6,6 +6,7 @@ export default class Interface {
     }
 
     setSession(val) {
+	    console.log("setting"+val);
         setCookie("session", val, 1);
     }
 
