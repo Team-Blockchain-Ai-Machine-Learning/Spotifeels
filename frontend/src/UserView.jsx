@@ -140,16 +140,7 @@ export default class UserView extends React.Component {
     return(
       <div>
         {question}
-        
 
-        
-    {/* <legend><span class="number">1</span> Your basic info</legend>
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="user_name">
-
-    <label for="mail">Email:</label>
-    <input type="email" id="mail" name="user_email"></input> */}
-        
        
        </div>
     );

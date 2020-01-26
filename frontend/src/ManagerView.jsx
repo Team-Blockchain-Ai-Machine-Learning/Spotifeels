@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 
 import LineChart from './LineChart';
 import Interface from './Interface';
+import './App.css';
 
 export default class ManagerView extends React.Component {
     constructor(props) {
@@ -9,7 +10,7 @@ export default class ManagerView extends React.Component {
 
         this.state = {
             i: new Interface(),
-            reactions: [],
+            reactions: [1],
         };
 
         var callback = (x) => (this.setState({reactions: x}));
@@ -35,7 +36,16 @@ export default class ManagerView extends React.Component {
   render() {
        var out = <h1>Loading...</h1>;
        if (this.state.reactions.length)
-        out = <LineChart reactions={this.state.reactions} />;
+       
+        out =  <div className="divBody"> 
+        <div className="textMargin">
+        <h1> Hello Paul! </h1>
+        <p> Insights: Your team's <b>motivation</b> is at an all-time high but their sense of <b>connection to their coworkers</b> is down 32% this week. 
+        </p>
+        <p> Social isolation at work can cause burnout. Try a community-buiding activity like an escape room! 
+        </p>
+        </div>
+        <LineChart reactions={this.state.reactions} /> </div>;
     return(
        out
     );

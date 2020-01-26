@@ -1,5 +1,6 @@
 import React from "react";
 import Interface from "./Interface";
+import './App.css';
 
 export default class LogIn extends React.Component {
     constructor(props) {
@@ -49,8 +50,12 @@ export default class LogIn extends React.Component {
 
     render() {
         return(
+            
             <form onSubmit={this.submit}>
+                <div align="center">
+                <div align="center" className="logoDiv"> </div>
                 <p>{this.state.error}</p>
+                <h1> HowAreYou </h1>
                 <input 
                     type="text" 
                     value={this.state.username} 
@@ -65,7 +70,8 @@ export default class LogIn extends React.Component {
                     onChange={this.updatePassword}
                 />
                 <br />
-                <input type="submit" value="Log In" />
+                <input className="prettyButton" type="submit" value="Log In" />
+                </div>
             </form>
         );
     }

@@ -20,6 +20,10 @@ export default class Logout extends React.Component {
     render() {
         var click = () => {this.state.i.delSession(); this.props.callback();};
 
-        return(<input type="button" value="log out" onClick={click}/>);
+        return(
+        <div id="some_menu_bar" class="menubar"> 
+            <input className="prettyButton" type="button" value="Log Out" onClick={click}/>
+        </div>
+        );
     }
 }

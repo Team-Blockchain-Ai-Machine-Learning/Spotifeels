@@ -1,6 +1,7 @@
 import React from 'react';
 import LineChart from './LineChart';
 import Interface from './Interface';
+import './App.css';
 
 export default class HRView extends React.Component {
   constructor(props) {
@@ -58,6 +59,13 @@ export default class HRView extends React.Component {
 	  console.log(this.state.users);
     if (this.state.users) {
       out = <div>
+        <div className="textMargin">
+        <h1> Hello Mark! </h1>
+        <p> Insights: Overall, employee <b>sleep patterns</b> are improving dramatically but feelings of <b>purpose and fufillement</b> is still low. 
+        </p>
+        <p> Disilusionment is a major contributor to burnout. Try hosting an event to foster innovation such as an internal hackathon.
+        </p>
+        </div>
           {this.state.users.map((user) => (<LineChart name={user.name} reactions={user.reactions}/>))}
         </div>;
       }
