@@ -17,7 +17,7 @@ function App() {
     return (<Login callback={loadApp} />);
   }
 
-  var user = {level: 0};//i.getUser(uid);
+  var user = {level: 2};//i.getUser(uid);
 
   if (user.level === 0) {
     return(<UserView />);
