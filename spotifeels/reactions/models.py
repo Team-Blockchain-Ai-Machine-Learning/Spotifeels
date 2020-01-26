@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from .langtest import analyze_text
+
 # Create your models here.
 
 class Skill(models.Model):
@@ -22,19 +24,16 @@ class Reaction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     mood = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
     comment = models.TextField(null=True, blank=True)
-    comment_sentiment = models.IntegerField()
+    comment_sentiment = models.FloatField(null=True, blank=True)
     time_of_reaction = models.DateTimeField(auto_now_add=True)
     task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True)
 
-    @property
-    def get_comment_sentiment(self):
-        a = 20
-        b = 10
-        c = 1
-        return a + b + c 
-
     def __str__(self):
         return f'{self.user} was feeling {self.mood} at {self.time_of_reaction}'
+
+    def save(self, *args, **kwargs):
+        self.comment_sentiment = analyze_text(self.comment)
+        super().save(*args, **kwargs)  # Call the "real" save() method.
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

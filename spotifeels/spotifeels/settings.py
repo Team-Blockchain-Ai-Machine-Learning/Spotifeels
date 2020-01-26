@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp.apps.MyappConfig',
     'reactions',
-    'rest_framework'
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
