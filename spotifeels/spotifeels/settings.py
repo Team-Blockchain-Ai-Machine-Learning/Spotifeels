@@ -25,7 +25,7 @@ SECRET_KEY = '@=&kgkxxm!*9robibv71_*wavi^-wna0bgo7j=2%g6^n$^n(+9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.95.8.121', 'www.studyspotter.ca']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
