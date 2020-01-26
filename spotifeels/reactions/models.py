@@ -39,6 +39,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     skills = models.ManyToManyField(Skill)
     task = models.ManyToManyField(Task, blank=True)
+    user_lvl = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(2)], null=True, blank=True)
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
