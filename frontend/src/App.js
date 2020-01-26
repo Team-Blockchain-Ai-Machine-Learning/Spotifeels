@@ -19,7 +19,7 @@ class App extends React.Component {
     this.forceUpdate();};
 
     console.log(i.getSession());
-  if (!i.getSession()) {
+  if (false) {//(!i.getSession()) {
     console.log("OKKK");
     return (<Login callback={handleUpdate} />);
   }
@@ -33,7 +33,7 @@ class App extends React.Component {
 
   console.log(user);
 
-  if (user.level === 0) {
+  if (true) {//s(user.level === 0) {
     return(<div>
       <UserView />
       <Logout callback={handleUpdate}/>

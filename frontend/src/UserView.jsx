@@ -8,7 +8,7 @@ export default class UserView extends React.Component {
 
     this.state = {
       numResponses: 0,
-      question: "",
+      question: "Good morning ___! How well rested do you feel?",
       reaction: {
         user: 1,
         mood: 50,
@@ -96,7 +96,7 @@ export default class UserView extends React.Component {
     var message = "";
     var question = "";
     var taskAdder = "";
-   if (this.state.numResponses == 0){
+   if (this.state.numResponses === 1){
      question = (
 
       <form  onSubmit={this.submitTask}>
@@ -112,7 +112,7 @@ export default class UserView extends React.Component {
 
      )
     }
-    else if (this.state.questionsAsked > 1){ 
+    else if (this.state.numResponses > 2){ 
       question = (
       <div>
       <h1> Great, thanks! </h1>
@@ -120,7 +120,7 @@ export default class UserView extends React.Component {
       </div>
       )
    }
-    else if (this.state.question){
+    else {
       question = (
       <form  onSubmit={this.submitReaction}>
       <fieldset>

@@ -23,6 +23,7 @@ export default class Interface {
     }
 
     postTask(payload) {
+        return {};
         return ajax("POST", backendURL+"/api/tasks/create/", payload);
     }
 
