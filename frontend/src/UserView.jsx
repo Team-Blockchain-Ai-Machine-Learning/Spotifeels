@@ -7,7 +7,8 @@ export default class UserView extends React.Component {
     super(props); 
 
     this.state = {
-      message: "",
+      numResponses: 0,
+      question: "Good morning Sarah! How well rested do you feel?",
       reaction: {
         user: 1,
         mood: 50,
@@ -37,14 +38,13 @@ export default class UserView extends React.Component {
       title: this.state.task.title,
       skills: ["gspot","mindfuck"]
     };
-    var callback = (x) => this.setState({message: x});
+    var callback = (x) => this.setState({numResponses: this.state.numResponses + 1});
     if (this.state.i.postTask(payload).then(
         function(res) {
-          callback("SENT!");
+          callback(payload);
         },
         function(res) {
-          console.log(res);
-          callback("lovely");
+          callback(payload);
         }
     )) {
         callback();
@@ -59,14 +59,19 @@ export default class UserView extends React.Component {
       comment: this.state.reaction.note,
       task: 1
     };
-    var callback = (x) => this.setState({message: x});
+    var callback = (payload) => {
+      this.setState({numResponses: this.state.numResponses + 1})
+      if(payload.mood < 15)
+      this.setState({question: "Sorry to hear that. Have you been having headaches or stomach problems lately?"})
+      else 
+      this.setState({question: "Great! Did you have a chance to relax and reset yesterday?"})
+    };
     if (this.state.i.postReaction(payload).then(
         function(res) {
-          callback("SENT!");
+          callback(payload);
         },
         function(res) {
-          console.log(res);
-          callback("lovely");
+          callback();
         }
     )) {
         callback();
@@ -87,27 +92,55 @@ export default class UserView extends React.Component {
 
   render() {
     var message = "";
-    if (this.state.message) {
-      message = <h1>{this.state.message}</h1>;
+    var question = "";
+    var taskAdder = "";
+   if (this.state.numResponses == 1){
+     question = (
+
+      <form  onSubmit={this.submitTask}>
+
+      <h1>What are you working on?</h1>
+      <fieldset>
+      <input type="text" value={this.state.task.title} onChange={this.updateTitle} placeholder="Title"/>
+      <input type="submit"></input>
+      
+      <br />
+      </fieldset>
+  </form>
+
+     )
+    }
+    else if (this.state.numResponses > 2){ 
+      question = (
+      <div>
+      <h1> Great, thanks! </h1>
+      <p> By the way, yoga is planned for 7:30am in the atrium on Wednesday. Mindfulness and exercise are very effective ways to reduce stress.</p>
+      </div>
+      )
+   }
+    else {
+      question = (
+      <form  onSubmit={this.submitReaction}>
+      <fieldset>
+        <h1>{this.state.question}</h1>
+        <div className="slidecontainer">
+          <input type="range" name="mood" min="0" max="100" className="slider"
+          value={this.state.mood}
+          onChange={this.updateMood}/>
+        </div>
+          <textarea value={this.state.note} onChange={this.updateNote} placeholder="Note"/>
+          <input type="submit"></input>
+          
+          <br />
+      </fieldset>
+
+      </form>
+      )
     }
     return(
       <div>
-        {message}
+        {question}
         
-        <form  onSubmit={this.submitReaction}>
-        <fieldset>
-          <div className="slidecontainer">
-            <input type="range" name="mood" min="0" max="100" className="slider"
-            value={this.state.mood}
-            onChange={this.updateMood}/>
-          </div>
-            <textarea value={this.state.note} onChange={this.updateNote} placeholder="Note"/>
-            <input type="submit"></input>
-            
-            <br />
-        </fieldset>
-
-        </form>
 
         
     {/* <legend><span class="number">1</span> Your basic info</legend>
@@ -117,16 +150,7 @@ export default class UserView extends React.Component {
     <label for="mail">Email:</label>
     <input type="email" id="mail" name="user_email"></input> */}
         
-        <form  onSubmit={this.submitTask}>
-
-            <h1>What are you working on?</h1>
-            <fieldset>
-            <input type="text" value={this.state.task.title} onChange={this.updateTitle} placeholder="Title"/>
-            <input type="submit"></input>
-            
-            <br />
-            </fieldset>
-        </form>
+       
        </div>
     );
   };
