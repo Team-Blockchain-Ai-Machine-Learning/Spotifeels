@@ -33,7 +33,7 @@ class Reaction(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    skills = models.ManyToManyField(Skill)
+    skills = models.ManyToManyField(Skill, blank=true)
     task = models.ManyToManyField(Task, blank=True)
     
 @receiver(post_save, sender=User)
