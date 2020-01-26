@@ -8,7 +8,7 @@ export default class UserView extends React.Component {
 
     this.state = {
       numResponses: 0,
-      question: "Good morning ___! How well rested do you feel?",
+      question: "Good morning Sarah! How well rested do you feel?",
       reaction: {
         user: 1,
         mood: 50,
@@ -44,8 +44,7 @@ export default class UserView extends React.Component {
           callback(payload);
         },
         function(res) {
-          console.log(res);
-          callback("lovely");
+          callback(payload);
         }
     )) {
         callback();
@@ -60,20 +59,19 @@ export default class UserView extends React.Component {
       comment: this.state.reaction.note,
       task: 1
     };
-    var callback = (x) => {
+    var callback = (payload) => {
       this.setState({numResponses: this.state.numResponses + 1})
-      if(payload.mood > 15)
+      if(payload.mood < 15)
       this.setState({question: "Sorry to hear that. Have you been having headaches or stomach problems lately?"})
       else 
       this.setState({question: "Great! Did you have a chance to relax and reset yesterday?"})
     };
     if (this.state.i.postReaction(payload).then(
         function(res) {
-          callback("SENT!");
+          callback(payload);
         },
         function(res) {
-          console.log(res);
-          callback("lovely");
+          callback();
         }
     )) {
         callback();
@@ -96,7 +94,7 @@ export default class UserView extends React.Component {
     var message = "";
     var question = "";
     var taskAdder = "";
-   if (this.state.numResponses === 1){
+   if (this.state.numResponses == 1){
      question = (
 
       <form  onSubmit={this.submitTask}>
@@ -116,7 +114,7 @@ export default class UserView extends React.Component {
       question = (
       <div>
       <h1> Great, thanks! </h1>
-      <p> By the way, yoga is planned for 7:30am in the atrium on Wednesday. Mindfullness and exercise are very effective ways to reduce stress.</p>
+      <p> By the way, yoga is planned for 7:30am in the atrium on Wednesday. Mindfulness and exercise are very effective ways to reduce stress.</p>
       </div>
       )
    }

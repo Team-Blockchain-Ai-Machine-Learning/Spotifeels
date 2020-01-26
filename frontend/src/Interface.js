@@ -19,11 +19,12 @@ export default class Interface {
     }
 
     postReaction(payload) {
+        // return {mood: 90};
         return ajax("POST", backendURL+"/api/reactions/create/", payload);
     }
 
     postTask(payload) {
-        return {};
+   //     return {};
         return ajax("POST", backendURL+"/api/tasks/create/", payload);
     }
 
