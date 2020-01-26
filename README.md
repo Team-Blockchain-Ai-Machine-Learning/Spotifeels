@@ -1,1 +1,1 @@
-﻿# [HowRU?](www.studyspotter.ca/dev)
+﻿# [HowRU?](http://www.studyspotter.ca/dev)
