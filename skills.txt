@@ -101,6 +101,7 @@ PostScript
 PowerShell
 Product Developpement
 Public Speaking
+Python
 Quality Insurance
 R
 R&B
