@@ -17,15 +17,19 @@ export default class LogIn extends React.Component {
     }
 
     submit(event) {
-        if (this.i.login(this.state.username, this.state.password).then(
+        var log = (x) => this.state.i.setSession(x);
+        var username = this.state.username;
+        if (this.state.i.getUsers().then(
             function(res) {
-                // TODO
-                return true;
+                for (var i = 0; i < res.data.length; i++) {
+                    if (res.data[i].username == username) {
+                        log(this.data[i].id);
+                        return true;
+                    }
+                }
             },
             function(res) {
-                // TODO
-                this.i.setSession(1);
-                return true;
+                return false;
             }
         )) {
             this.props.callback();

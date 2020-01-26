@@ -2,11 +2,15 @@ var backendURL = "http://www.studyspotter.ca";
 
 export default class Interface {
     getSession() {
-        getCookie("session");
+        return getCookie("session");
     }
 
-    setSession() {
-        setCookie("session", 1, 1);
+    setSession(val) {
+        setCookie("session", val, 1);
+    }
+
+    delSession() {
+        setCookie("session", "", 0);
     }
 
     login(username, password) {
@@ -31,7 +35,7 @@ export default class Interface {
     }
 
     getUsers(payload) {
-        return ajax("GET", backendURL+"/api/users", null);
+        return ajax("GET", backendURL+"/api/users", payload);
     }
 }
 
