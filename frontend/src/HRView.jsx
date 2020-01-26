@@ -34,6 +34,7 @@ var reactions = [
     },
 ];
 
+
 export default class HRView extends React.Component {
   constructor(props) {
     super();

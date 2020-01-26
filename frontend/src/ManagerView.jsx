@@ -1,4 +1,5 @@
 import React from 'react';
+
 import LineChart from './LineChart';
 
 var reactions = [
@@ -35,11 +36,13 @@ var reactions = [
 ];
 
 export default class ManagerView extends React.Component {
+
   state = { 
     center: null
   };
 
   render() {
+
     return(
         <LineChart reactions={reactions} />
     );

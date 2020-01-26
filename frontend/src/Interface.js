@@ -14,6 +14,11 @@ export default class Interface {
         return ajax("GET", backendURL+"/login", payload);
     }
 
+    postReaction(reaction){
+        var payload = {id: this.i.getSession(), reaction: reaction}
+        return ajax("POST", backendURL+"/reaction", payload);
+    }
+
 }
 
 function ajax(method, url, payload) {
