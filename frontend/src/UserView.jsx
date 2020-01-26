@@ -6,22 +6,55 @@ export default class UserView extends React.Component {
     super(props); 
 
     this.state = {
-      mood: 50,
-      note: "",
       message: "",
+      reaction: {
+        mood: 50,
+        note: "",
+        task: 0
+      },
+      task: {
+        title: "",
+        skills: []
+      },
+      
       i: new Interface(),
     };
 
-    this.submit = this.submit.bind(this);
+    this.submitReaction = this.submitReaction.bind(this);
     this.updateMood = this.updateMood.bind(this);
     this.updateNote = this.updateNote.bind(this);
+
+    this.submitTask = this.submitTask.bind(this);
+    this.updateTitle = this.updateTitle.bind(this);
   }
 
-  submit(event) {
+  submitTask(event) {
     var payload = {
       user: 1,
-      mood: parseInt(this.state.mood),
-      comment: this.state.note,
+      mood: parseInt(this.state.reaction.mood),
+      title: this.state.task.title,
+      skills: ["gspot","mindfuck"]
+    };
+    var callback = (x) => this.setState({message: x});
+    if (this.state.i.postReaction(payload).then(
+        function(res) {
+          callback("SENT!");
+        },
+        function(res) {
+          console.log(res);
+          callback("lovely");
+        }
+    )) {
+        callback();
+    } 
+    event.preventDefault(); 
+  }
+
+  submitReaction(event) {
+    var payload = {
+      user: 1,
+      mood: parseInt(this.state.reaction.mood),
+      comment: this.state.reaction.note,
       task: 1
     };
     var callback = (x) => this.setState({message: x});
@@ -40,10 +73,13 @@ export default class UserView extends React.Component {
   }
 
   updateMood(event) {
-    this.setState({mood: event.target.value});
+    this.setState({reaction: {mood: event.target.value}});
   }
   updateNote(event) {
-    this.setState({note: event.target.value});
+    this.setState({reaction: {note: event.target.value}});
+  }
+  updateTitle(event) {
+    this.setState({task: {title: event.target.value}});
   }
 
 
@@ -55,11 +91,18 @@ export default class UserView extends React.Component {
     return(
       <div>
         {message}
-        <form  onSubmit={this.submit}>
+        <form  onSubmit={this.submitReaction}>
             <input type="range" name="mood" min="0" max="100"
-            value={this.state.mood}
+            value={this.state.reaction.mood}
             onChange={this.updateMood}/>
-            <input type="text" value={this.state.note} onChange={this.updateNote} placeholder="Note"/>
+            <input type="textarea" value={this.state.reaction.note} onChange={this.updateNote} placeholder="Note"/>
+            <input type="submit"></input>
+            
+            <br />
+
+        </form>
+        <form  onSubmit={this.submitTask}>
+            <input type="text" value={this.state.task.title} onChange={this.updateTitle} placeholder="Title"/>
             <input type="submit"></input>
             
             <br />
