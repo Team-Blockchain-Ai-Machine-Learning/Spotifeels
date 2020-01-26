@@ -58,7 +58,7 @@ export default class HRView extends React.Component {
     var out = <h1>Loading...</h1>;
 	  console.log(this.state.users);
     if (this.state.users) {
-      out = <div>
+      out =  <div className="divBody"> 
         <div className="textMargin">
         <h1> Hello Mark! </h1>
         <p> Insights: Overall, employee <b>sleep patterns</b> are improving dramatically but feelings of <b>purpose and fufillement</b> is still low. 

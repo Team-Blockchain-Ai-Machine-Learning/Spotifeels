@@ -102,7 +102,7 @@ export default class UserView extends React.Component {
       <h1>What are you working on?</h1>
       <fieldset>
       <input type="text" value={this.state.task.title} onChange={this.updateTitle} placeholder="Title"/>
-      <input type="submit"></input>
+      <input className="prettyButton" type="submit"></input>
       
       <br />
       </fieldset>
@@ -129,7 +129,7 @@ export default class UserView extends React.Component {
           onChange={this.updateMood}/>
         </div>
           <textarea value={this.state.note} onChange={this.updateNote} placeholder="Note"/>
-          <input type="submit"></input>
+          <input className="prettyButton" type="submit"></input>
           
           <br />
       </fieldset>
