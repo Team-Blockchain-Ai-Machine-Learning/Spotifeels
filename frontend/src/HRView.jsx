@@ -1,6 +1,7 @@
 import React from 'react';
 
-export default class UserView extends React.Component {
+
+export default class HRView extends React.Component {
   state = { 
     center: null
   };
