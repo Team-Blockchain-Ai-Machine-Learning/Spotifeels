@@ -18,6 +18,9 @@ class Task(models.Model):
     title = models.TextField()
     skills = models.ManyToManyField(Skill, blank=True)
 
+    def __str__(self):
+        return f'{self.user}: {self.title}'
+
 class Reaction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     mood = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
