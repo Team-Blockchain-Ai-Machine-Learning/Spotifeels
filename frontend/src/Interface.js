@@ -1,4 +1,4 @@
-var backendURL = "http://34.95.8.121:8000";
+var backendURL = "http://www.studyspotter.ca";
 
 export default class Interface {
     getSession() {
